@@ -1,0 +1,88 @@
+@Echo ##################
+@Echo ##################	STARTING UNBABEL PROJECT
+@Echo ##################	BACKEND-ENGINEERING-CHALLENGE
+@Echo ##################	RODRIGO MATOS
+@Echo ##################
+@Echo ##################
+@Echo ##################
+@Echo ##################	requirements	##################
+@Echo ##################
+@Echo:
+@Echo ##################	Checking if java is in the system variables	##################
+@Echo:
+@Echo Off
+Set "JV="
+For /F "Tokens=3" %%A In ('java -version 2^>^&1') Do If Not Defined JV Set "JV=%%~A"
+If /I "%JV%"=="not" (Echo Java path is missing.
+Echo you can install by downloading through 
+Echo https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html to install 
+exit
+) Else (Echo Java path exists, the installed Version is "%JV%")
+PAUSE
+@Echo:
+@Echo:
+@Echo:
+@Echo ##################	Checking if libraries are installed	##################
+@Echo:
+@Echo The following scripts were made using:
+@Echo 			-anaconda to ease management of python libs (to install: https://www.anaconda.com/distribution/) 
+@Echo 			-pyspark (to install: pip install pyspark). In my case I used version '2.4.3'
+@Echo 			-numpy, is installed as part of the anaconda bundled and should be up to date. In my case I used version '1.16.2'
+@Echo 			-pandas, is installed as part of the anaconda bundled and should. In my case I used version '0.24.2'
+@Echo 			-make sure that anaconda path is added to user variables, in my case I added C:\Users\Rodrigo\Anaconda3 to path
+@Echo 			 on the command shell write python. If the path to the python.exe was sucessfull it should open the python shell.
+@Echo 			-Make sure that hadoop libs are downloaded and added path, in my case I added C:\Users\Rodrigo\Hadoop\Bin to path
+@Echo:
+@Echo		All of the above condition should be met before going further for the scripts to work. 
+@Echo		If some of the changes aren't met please do the change, close this file and reboot your computer
+PAUSE
+@Echo:
+@Echo:
+@Echo:
+@Echo ##################
+@Echo ##################	Usage	##################
+@Echo ##################
+@Echo:
+@Echo ##################	Running the code	##################
+@Echo To use use demo variables continue to run bat file
+@Echo To use custom variables 
+@Echo			-this bat file can be changed 
+@Echo			-you can run on command window or you can run on anaconda prompt, 
+@Echo			 anaconda prompt can be use in similar way than command window
+PAUSE
+@Echo:
+@Echo:
+@Echo:
+@Echo ##################	Creating Dummy Data	##################
+@Echo:
+@Echo	python create_dummy_data.py time_unit time_val
+@Echo:
+@Echo  to create dummy data we can pass two types of variable time_unit  and time_val.
+@Echo		-time_unit has to be in "seconds" or "minutes"
+@Echo		-time_val has to be a given integer number
+@Echo		-both parameters must be specified
+@Echo:
+@Echo	Creating dummy data using parameters time_unit=seconds and time_val=30
+python create_dummy_data.py seconds 30
+if %ERRORLEVEL% neq 0 exit
+@Echo:
+@Echo:
+@Echo:
+@Echo ##################	Analysing Data	##################
+@Echo:
+@Echo	python get_KPI.py time_unit time_val analysis_type
+@Echo:
+@Echo  to analyse data we can pass two types of variable time_unit  and time_val.
+@Echo		-time_unit has to be in "seconds" or "minutes"
+@Echo		-time_val has to be a given sinteger number
+@Echo		-analysis_type this is a parameter to define the partition for determining the average delievery time
+@Echo		 The parameter can have the values source_language or target_language or source_target_language or all_recs
+@Echo		-all parameters above must be specified
+@Echo:
+@Echo	Analysing data using parameters time_unit=seconds, time_val=30,analysis_type=all_recs
+python get_KPI.py seconds 30 all_recs
+if %ERRORLEVEL% neq 0 exit
+@Echo:
+@Echo:
+@Echo:
+PAUSE
